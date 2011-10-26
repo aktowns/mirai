@@ -1,0 +1,5 @@
+Name: Regex
+Author: Ashley Towns <ashleyis@me.com>
+Version: 0.0.1
+Type: Channel
+Files: [ regex.rb ]

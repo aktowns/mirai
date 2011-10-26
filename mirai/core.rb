@@ -86,7 +86,7 @@ module Mirai
 				p message
 				p handle
 				if (message.match(handle))
-					val[:obj].send(val[:method], userhash, channel, message)
+					val[:obj].send(val[:method], userhash, channel, message.match(handle))
 				end
 			end
 		end

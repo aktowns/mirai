@@ -13,14 +13,16 @@ Plugins:
   - Plugin: test-plugin  # 'core' plugins are stored in mirai/plugins/
     Update: core
     Restrict: ashleyis!oohbouncy@*
-  - Plugin: test-http # a plugin can auto update from a website..
-    Update: http
-    URL: http://www.google.com
-    Frequency: 1d
-  - Plugin: test-git # or you can have plugins auto update from a git repo..
-    Update: git
-    URL: git://github.com/aktowns/mirai-gitplugin.git
-    Frequency: 1d
+  - Plugin: regex-plugin  # 'core' plugins are stored in mirai/plugins/
+    Update: core
+  # - Plugin: test-http # a plugin can auto update from a website..
+  #   Update: http
+  #   URL: http://www.google.com
+  #   Frequency: 1d
+  # - Plugin: test-git # or you can have plugins auto update from a git repo..
+  #   Update: git
+  #   URL: git://github.com/aktowns/mirai-gitplugin.git
+  #   Frequency: 1d
 
 # Server setup
 # alot of settings can be left blank for defaults.
