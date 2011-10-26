@@ -1,0 +1,42 @@
+# Miraibot config file
+# Either leave entry blank or remove completly to use the defaults..
+
+# General config
+ConfigName: Mirai-testing
+ConfigAuthor: Ashley Towns <ashleyis@me.com>
+BotNick: mirai
+BotUser: ikerawks
+BotFullname: I eat cheese
+
+# Plugin setup
+Plugins:
+  - Plugin: test-plugin  # 'core' plugins are stored in mirai/plugins/
+    Update: core
+    Restrict: ashleyis!oohbouncy@*
+  - Plugin: test-http # a plugin can auto update from a website..
+    Update: http
+    URL: http://www.google.com
+    Frequency: 1d
+  - Plugin: test-git # or you can have plugins auto update from a git repo..
+    Update: git
+    URL: git://github.com/aktowns/mirai-gitplugin.git
+    Frequency: 1d
+
+# Server setup
+# alot of settings can be left blank for defaults.
+Servers:
+  - Server: avoidinspace
+    Hosts:
+      - irc.avoidinspace.com:6667 # <server>:[+ ssl]<port>
+      - kirby.avoidinspace.com
+      - peach.avoidinspace.com
+    Chans: [main, bots]
+    ServerPassword:
+    ServerReconnect: true
+    DisabledPlugins: [eval]
+    # override the defaults.
+    BotNick:
+    BotUser:
+    BotFullname:
+
+
