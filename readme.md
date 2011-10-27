@@ -34,15 +34,16 @@ mirai
 --->helloworld.rb  
 
 helloworld-plugin.yml should consist of:
-~~~~~yaml
+~~~~ yaml
 Name: Helloworld
 Author: Your name <you@email.com>
 Version: 0.0.1
 Type: Channel
 Files: [ helloworld.rb ]
 ~~~~~
+
 helloworld.rb should consist of:
-~~~~~ ruby
+~~~~ ruby
 class HelloworldPlugin < Mirai::Plugin
 	def on_register
 		add_channel_handler(/^#{@trigger}talktome/, :test_handler) # ^talktome
