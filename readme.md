@@ -33,7 +33,7 @@ mirai
 --->helloworld-plugin.yml  
 --->helloworld.rb  
 
-helloworld-plugin.yml should consist of:
+helloworld-plugin.yml should consist of:  
 ~~~~~~~~~ { yaml }
 Name: Helloworld
 Author: Your name <you@email.com>
@@ -42,7 +42,7 @@ Type: Channel
 Files: [ helloworld.rb ]
 ~~~~~~~~~
 
-helloworld.rb should consist of:
+helloworld.rb should consist of:  
 ~~~~~~~~~ { ruby }
 class HelloworldPlugin < Mirai::Plugin
 	def on_register
