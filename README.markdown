@@ -43,6 +43,7 @@ Files: [ helloworld.rb ]
 ~~~~~
 
 helloworld.rb should consist of:  
+
 ~~~~~ ruby
 class HelloworldPlugin < Mirai::Plugin
 	def on_register
@@ -58,6 +59,18 @@ class HelloworldPlugin < Mirai::Plugin
 	end
 end
 ~~~~~
+
+~~~~~ ruby
+# create a custom renderer that allows highlighting of code blocks
+class HTMLwithAlbino < Redcarpet::Render::HTML
+  def block_code(code, language)
+    Albino.safe_colorize(code, language)
+  end
+end
+
+markdown = Redcarpet::Markdown.new(HTMLwithAlbino, :fenced_code_blocks => true)
+~~~~~
+
 *TODO: expand on plugins more*
 
 ### Builtin Webserver
