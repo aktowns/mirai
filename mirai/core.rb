@@ -1,7 +1,7 @@
 module Mirai
 	class Core
-		def initialize config, servername, eventmachine
-			@config, @servername, @em = config, servername, eventmachine
+		def initialize config, servername, eventmachine, webserver
+			@config, @servername, @em, @webserver = config, servername, eventmachine, webserver
 			@handlers = {}
 			puts "Core initialized for #{servername}"
 		end
@@ -51,6 +51,7 @@ module Mirai
 
 					case numeric.to_i
 					when 376 then @config.channels(@servername).each{|c| do_join(c) }
+					when 433 then do_nick(@config.config["BotNick"] += "_")
 					end
 				end
 				
@@ -66,7 +67,15 @@ module Mirai
 			@handlers[handler] = {:obj => object, :method => method}
 		end
 
-		def unregister_channel_handler handler, object, method
+		def unregister_channel_handler handler
+
+		end
+
+		def register_web_handler handler, object, method
+			@webserver.add_web_handler(handler, object, method)
+		end
+
+		def unregister_web_handler handler
 
 		end
 
@@ -83,8 +92,6 @@ module Mirai
 		def on_channelmessage userhash, channel, message
 			puts "#{userhash[:nick]}->#{channel} >> #{message}"
 			@handlers.each do |handle, val|
-				p message
-				p handle
 				if (message.match(handle))
 					val[:obj].send(val[:method], userhash, channel, message.match(handle))
 				end
@@ -103,6 +110,11 @@ module Mirai
 		def do_join channel, pass=nil
 			puts "Joining #{channel}"
 			rawsend "JOIN #{channel} #{pass}"
+		end
+
+		def do_nick newnick
+			puts "Changing nick to #{newnick}"
+			rawsend "NICK #{newnick}"
 		end
 	end
 end

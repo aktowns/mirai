@@ -28,5 +28,11 @@ module Mirai
 			puts "Registering handler for #{name}."
 			@core.register_channel_handler(handler, object, callback)
 		end
+
+		def register_web_handler handler, object, callback
+			name = @plugins.find{|x,y| y[:pluginklass] == object }.first
+			puts "Registering handler for #{name}."
+			@core.register_web_handler(handler, object, callback)
+		end
 	end
 end

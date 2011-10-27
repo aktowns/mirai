@@ -7,6 +7,7 @@ ConfigAuthor: Ashley Towns <ashleyis@me.com>
 BotNick: mirai
 BotUser: ikerawks
 BotFullname: I eat cheese
+PreferredTrigger: `
 
 # Plugin setup
 Plugins:
@@ -23,6 +24,13 @@ Plugins:
   #   Update: git
   #   URL: git://github.com/aktowns/mirai-gitplugin.git
   #   Frequency: 1d
+
+# Mirai contains a built-in thin server for plugins to integrate with
+# for things like web callbacks
+WebServer:
+  Address: 0.0.0.0
+  Port: 3000
+  Enabled: true
 
 # Server setup
 # alot of settings can be left blank for defaults.

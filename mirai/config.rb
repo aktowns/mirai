@@ -61,5 +61,23 @@ module Mirai
 		def plugins
 			value_for nil, "Plugins"
 		end
+
+		def preferredtrigger
+			val = value_for(nil, "PreferredTrigger")
+			val = "`" if val.nil?
+			val
+		end
+
+		def webserverhost 
+			value_for(nil, "WebServer")["Address"]
+		end
+
+		def webserverport
+			value_for(nil, "WebServer")["Port"]
+		end
+
+		def webserverenabled
+			value_for(nil, "WebServer")["Enabled"]
+		end
 	end
 end

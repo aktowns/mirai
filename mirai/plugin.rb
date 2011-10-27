@@ -2,6 +2,7 @@ module Mirai
 	class Plugin
 		def initialize config, em, servername, pluginname, handler
 			@em, @config, @servername, @pluginname, @handler = em, config, servername, pluginname, handler
+			@trigger = @config.preferredtrigger
 		end
 
 		def inspect
@@ -18,6 +19,9 @@ module Mirai
 		end
 		def add_channel_handler handler, callback
 			@handler.register_channel_handler(handler, self, callback)
+		end
+		def add_web_handler handler, callback
+			@handler.register_web_handler(handler, self, callback)
 		end
 	end
 end

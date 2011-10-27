@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'yaml'
 require 'eventmachine'
+require 'thin'
 
 unless Kernel.respond_to?(:require_relative)
   module Kernel
@@ -15,11 +16,12 @@ require_relative "mirai/config"
 require_relative "mirai/core"
 require_relative "mirai/plugin"
 require_relative "mirai/pluginhandler"
+require_relative "mirai/web"
 
 module Mirai
-	def initialize conf, servername
+	def initialize conf, servername, webserver
 		@conf, @servername = conf, servername
-		@core = Mirai::Core.new conf, servername, self
+		@core = Mirai::Core.new conf, servername, self, webserver
 		@pluginhandler = Mirai::PluginHandler.new @conf, @servername, self, @core
 		@buffer = ""
 	end
@@ -47,6 +49,8 @@ end
 conf = Mirai::Config.new "config.yml"
 servername = conf.config["Servers"].first["Server"]
 
- EventMachine::run do
- 	EventMachine.connect conf.hosts(servername).first[0], conf.hosts(servername).first[1], Mirai, conf, servername
- end
+EventMachine::run do
+	webserver = Mirai::WebServer.new
+	EventMachine.connect conf.hosts(servername).first[0], conf.hosts(servername).first[1], Mirai, conf, servername, webserver
+	Thin::Server.start(conf.webserverhost, conf.webserverport, webserver) if (conf.webserverenabled)
+end
