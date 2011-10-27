@@ -34,6 +34,7 @@ mirai
 --->helloworld.rb  
 
 helloworld-plugin.yml should consist of:  
+
 ~~~~~ yaml
 Name: Helloworld
 Author: Your name <you@email.com>
@@ -58,17 +59,6 @@ class HelloworldPlugin < Mirai::Plugin
 		"OK" # return text "OK" to the webrequest
 	end
 end
-~~~~~
-
-~~~~~ ruby
-# create a custom renderer that allows highlighting of code blocks
-class HTMLwithAlbino < Redcarpet::Render::HTML
-  def block_code(code, language)
-    Albino.safe_colorize(code, language)
-  end
-end
-
-markdown = Redcarpet::Markdown.new(HTMLwithAlbino, :fenced_code_blocks => true)
 ~~~~~
 
 *TODO: expand on plugins more*
