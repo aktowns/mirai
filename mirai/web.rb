@@ -27,7 +27,11 @@ module Mirai
 					['This is not the server you\'re looking for']
 				] 
 			else
-				response
+				[
+					200,
+					{ 'Content-type' => 'text/plain' },
+					[ response ]
+				]
 			end
 		end
 	end
