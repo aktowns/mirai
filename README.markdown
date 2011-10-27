@@ -5,7 +5,7 @@ Mirai
 ## About
 Mirai is yet another ruby irc bot, focused on plugins supplying features over core features in the bot for example the only commands the bot provides without plugins are `about-plugin` and `help [plugin]`.  
 
-Mirai is written using the wonderful [EventMachine]() library, and uses [yaml]() for configuration and [sqlite]() for storage and [daemons]() for background processing the builtin webserver is based on [thin](). plugins may contain additional dependencies. 
+Mirai is written using the wonderful [EventMachine](http://rubyeventmachine.com/) library, and uses [yaml](http://yaml.org/start.html) for configuration and [sqlite](https://github.com/luislavena/sqlite3-ruby) for storage and [daemons](http://daemons.rubyforge.org/) for background processing the builtin webserver is based on [thin](http://code.macournoyer.com/thin/). plugins may contain additional dependencies. 
 
 ## Why?
 Because i can!, and have different ideas on what a good bot should look like. 
@@ -25,15 +25,16 @@ When writing plugins you will need to supply a `plugin-name.yml` file, check wri
 ## Writing Plugins
 Plugins are subclasses of the `Miraii::Plugin` class and provide a few helper functions to get you started.  
 Firstly, lets create a hello world plugin.
+
 ### Hello World
 The folder structure should look similar to the following:  
 mirai   
-->plugins    
--->helloworld-plugin  
---->helloworld-plugin.yml  
---->helloworld.rb  
+-> plugins    
+--> helloworld-plugin  
+---> helloworld-plugin.yml  
+---> helloworld.rb  
 
-helloworld-plugin.yml should consist of:  
+`helloworld-plugin.yml` should consist of:  
 
 ~~~~~ yaml
 Name: Helloworld
@@ -43,7 +44,7 @@ Type: Channel
 Files: [ helloworld.rb ]
 ~~~~~
 
-helloworld.rb should consist of:  
+`helloworld.rb` should consist of:  
 
 ~~~~~ ruby
 class HelloworldPlugin < Mirai::Plugin
