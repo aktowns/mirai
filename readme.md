@@ -20,7 +20,7 @@ Mirai should run on MRI 1.8.7, 1.9.2 and jruby.
 Mirai uses yaml for all configurations, to setup the bot you will need to open `config.yml` in your favourite editor.
 When writing plugins you will need to supply a `plugin-name.yml` file, check writing plugins below for more information.
 
-*TODO:* expand on config
+*TODO: expand on config*
 
 ## Writing Plugins
 Plugins are subclasses of the `Miraii::Plugin` class and provide a few helper functions to get you started.  
@@ -34,16 +34,41 @@ mirai
 --->helloworld.rb  
 
 helloworld-plugin.yml should consist of:
-    dd  
-    ee
+```yaml
+Name: Helloworld
+Author: Your name <you@email.com>
+Version: 0.0.1
+Type: Channel
+Files: [ helloworld.rb ]
+```
 helloworld.rb should consist of:
-
+```ruby
+class HelloworldPlugin < Mirai::Plugin
+	def on_register
+		add_channel_handler(/^#{@trigger}talktome/, :test_handler) # ^talktome
+		add_web_handler(/^\/helloworld/, :test_web_handler) # http://0.0.0.0:3000/helloworld
+	end
+	def test_handler(userhash, channel, matches)
+		privmsg channel, "Well, Hello World! #{userhash[:nick]}"
+	end
+	def test_web_handler(env)
+		privmsg "#achannel", "Hello world from the web!"
+		"OK" # return text "OK" to the webrequest
+	end
+end
+```
+*TODO: expand on plugins more*
 
 ### Builtin Webserver
+Mirai contains a built in webserver in order to write plugins for callbacks from webservices (github for instance)
+
+*TODO: expand expand*
 
 ## Updates
 
-## Security
-### Security is a lie
+*TODO: self update plugin*
+*TODO: plugin auto updates*
+
 ## Todo
 
+*TODO: todo*
