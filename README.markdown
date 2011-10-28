@@ -49,12 +49,12 @@ Files: [ helloworld.rb ]
 ~~~~~ ruby
 class HelloworldPlugin < Mirai::Plugin
 	def on_register															# Called when the plugin is initialized
-		add_channel_handler(/^#{@trigger}talktome/, :test_handler) 			# ^talktome
+		add_channel_handler(/^#{@trigger}talktome (.*)$/, :test_handler) 			# ^talktome
 		add_web_handler(/^\/helloworld/, :test_web_handler) 				# http://0.0.0.0:3000/helloworld
 	end
 
-	def test_handler(userhash, channel, matches)
-		privmsg channel, "Well, Hello World! #{userhash[:nick]}"
+	def test_handler(info, what)
+		reply "Well, Hello World! #{info[:nick]}. I don't know what #{what} is!"
 	end
 
 	def test_web_handler(env)

@@ -16,6 +16,8 @@ Plugins:
     Restrict: ashleyis!oohbouncy@*
   - Plugin: regex-plugin  # 'core' plugins are stored in mirai/plugins/
     Update: core
+  # - Plugin: ey-plugin 
+  #   Update: core
   # - Plugin: test-http # a plugin can auto update from a website..
   #   Update: http
   #   URL: http://www.google.com

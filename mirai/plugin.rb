@@ -23,5 +23,17 @@ module Mirai
 		def add_web_handler handler, callback
 			@handler.register_web_handler(handler, self, callback)
 		end
+
+		def reply message
+			privmsg @channel, message
+		end
+
+		def mirror_handle to, userhash, channel, matches
+			@channel = channel
+			userhash[:channel] = channel
+			userhash[:raw] = matches[0]
+			userhash[:matches] = matches
+			send to, userhash, *matches[1..-1]
+		end
 	end
 end

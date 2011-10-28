@@ -93,7 +93,7 @@ module Mirai
 			puts "#{userhash[:nick]}->#{channel} >> #{message}"
 			@handlers.each do |handle, val|
 				if (message.match(handle))
-					val[:obj].send(val[:method], userhash, channel, message.match(handle))
+					val[:obj].send(:mirror_handle, val[:method], userhash, channel, message.match(handle))
 				end
 			end
 		end
