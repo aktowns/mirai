@@ -17,6 +17,8 @@ Plugins:
     Restrict: ashleyis!oohbouncy@*
   - Plugin: regex-plugin
     Update: core
+  - Plugin: update-plugin
+    Update: core
   # - Plugin: ey-plugin 
   #   Update: core
   #   Settings:

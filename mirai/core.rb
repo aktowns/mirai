@@ -24,7 +24,6 @@ module Mirai
 
 			if data.match(rgxUser)
 				nick, ident, host, rest = $1, $2, $3, $4.strip
-				puts "user"
 				if rest.match(rgxChannelMessage)
 					channel, message = "##{$1}", $2
 					userhash = {

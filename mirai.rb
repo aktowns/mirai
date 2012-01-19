@@ -17,6 +17,7 @@ require_relative "mirai/core"
 require_relative "mirai/plugin"
 require_relative "mirai/pluginhandler"
 require_relative "mirai/web"
+require_relative "update"
 
 module Mirai
 	def initialize conf, servername, webserver
