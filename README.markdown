@@ -8,13 +8,17 @@ Mirai is yet another ruby irc bot, focused on plugins supplying features over co
 Mirai is written using the wonderful [EventMachine](http://rubyeventmachine.com/) library, and uses [yaml](http://yaml.org/start.html) for configuration and [sqlite](https://github.com/luislavena/sqlite3-ruby) for storage and [daemons](http://daemons.rubyforge.org/) for background processing the builtin webserver is based on [thin](http://code.macournoyer.com/thin/). plugins may contain additional dependencies. 
 
 ## Why?
-Because i can!, and have different ideas on what a good bot should look like. 
+Because I can!, and have different ideas on what a good bot should look like. 
+
+## How?
+After editing the config file (below) run `./runbot start` or to not background the process `./runbot start --ontop` 
+
 
 ## Configuration
 
 ### Dependencies
 To install the rubygem dependencies simply run `bundle install` in the root of the repo.  
-Mirai should run on MRI 1.8.7, 1.9.2 and jruby.
+Mirai should run on ruby 1.9.3.
 
 ### config.yml
 Mirai uses yaml for all configurations, to setup the bot you will need to open `config.yml` in your favourite editor.
