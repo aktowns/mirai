@@ -20,7 +20,10 @@ module Mirai
       trigger = opts[:trigger].nil? ? @config.preferredtrigger : opts[:trigger]
       trigger == :none && trigger = ""
       
-			@handler.register_channel_handler(Regexp.new("^#{trigger}#{handler}"), self, callback)
+      prefix = opts[:prefix].nil? ? "^" : opts[:prefix]
+      prefix == :none && prefix = ""
+      
+			@handler.register_channel_handler(Regexp.new("#{prefix}#{trigger}#{handler}"), self, callback)
 		end
 		def add_web_handler handler, callback
 			@handler.register_web_handler(handler, self, callback)
