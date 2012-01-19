@@ -13,7 +13,7 @@ module Mirai
 		end
 
 		def on_data data
-			puts "> #{data}"
+			puts "> #{data}" if @config.debug?
 			rgxUser = /^:([^\x07\x2C\s]+?)!([^\x07\x2C\s]+?)@([^\x07\x2C\s]+?)\s(.*)$/
 			rgxServer = /^:([^\x07\x2C\s]+?)\s(.*)$/
 			rgxCmd = /^([^:\x07\x2C\s]+?)\s:(.*)$/

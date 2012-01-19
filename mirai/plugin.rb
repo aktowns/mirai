@@ -2,7 +2,6 @@ module Mirai
 	class Plugin
 		def initialize config, em, servername, pluginname, handler, settings
 			@em, @config, @servername, @pluginname, @handler, @settings = em, config, servername, pluginname, handler, settings
-			@trigger = @config.preferredtrigger
 		end
 
 		def inspect
@@ -17,8 +16,11 @@ module Mirai
 		def privmsg channel, message
 			rawsend "PRIVMSG #{channel} :#{message}"
 		end
-		def add_channel_handler handler, callback
-			@handler.register_channel_handler(handler, self, callback)
+		def add_channel_handler handler, callback, opts={}
+      trigger = opts[:trigger].nil? ? @config.preferredtrigger : opts[:trigger]
+      trigger == :none && trigger = ""
+      
+			@handler.register_channel_handler(Regexp.new("^#{trigger}#{handler}"), self, callback)
 		end
 		def add_web_handler handler, callback
 			@handler.register_web_handler(handler, self, callback)
@@ -26,11 +28,7 @@ module Mirai
 
 		def reply message
 			privmsg @channel, message
-		end
-
-		def trigger
-			@trigger
-		end
+    end
 
 		def settings value
 			@settings["Settings"].nil? ? nil : @settings["Settings"][value]

@@ -8,6 +8,7 @@ BotNick: mirai
 BotUser: ikerawks
 BotFullname: I eat cheese
 PreferredTrigger: \!
+Debug: True
 
 # Plugin setup
 Plugins:
@@ -16,11 +17,11 @@ Plugins:
     Restrict: ashleyis!oohbouncy@*
   - Plugin: regex-plugin
     Update: core
-  - Plugin: ey-plugin 
-    Update: core
-    Settings:
-      WebappName: oompfserver
-      WebappRoot: /data/..
+  # - Plugin: ey-plugin 
+  #   Update: core
+  #   Settings:
+  #     WebappName: oompfserver
+  #     WebappRoot: /data/..
   # - Plugin: pivotal-plugin
   #   Update: core
   #   Settings:

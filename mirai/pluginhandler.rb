@@ -8,6 +8,7 @@ module Mirai
 			@config, @servername, @em, @core = config, servername, em, core
 			@plugins = {}
 			@config.plugins.each do |plugin|
+        puts "Loading plugin: #{plugin}"
 				next if plugin["Update"] != "core"
 				name = plugin["Plugin"]
 				metadatalocation = "plugins/#{name}/"
@@ -25,13 +26,13 @@ module Mirai
 
 		def register_channel_handler handler, object, callback
 			name = @plugins.find{|x,y| y[:pluginklass] == object }.first
-			puts "Registering handler for #{name}."
+			puts "Registering channel handler for #{name}."
 			@core.register_channel_handler(handler, object, callback)
 		end
 
 		def register_web_handler handler, object, callback
 			name = @plugins.find{|x,y| y[:pluginklass] == object }.first
-			puts "Registering handler for #{name}."
+			puts "Registering web handler for #{name}."
 			@core.register_web_handler(handler, object, callback)
 		end
 	end

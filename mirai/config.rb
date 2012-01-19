@@ -61,6 +61,10 @@ module Mirai
 		def plugins
 			value_for nil, "Plugins"
 		end
+    
+    def debug?
+      value_for nil, "Debug"
+    end
 
 		def preferredtrigger
 			val = value_for(nil, "PreferredTrigger")

@@ -1,8 +1,9 @@
 class TestPlugin < Mirai::Plugin
 	def on_register
-		add_channel_handler(/^#{@trigger}test/, :test_handler)
-		add_web_handler(/^\/testing/, :test_web_handler)
+		add_channel_handler(/test/, :test_handler) # Trigger is assumed as default
+		add_web_handler(/testing/, :test_web_handler)
 	end
+  
 	def test_handler(info)
 		reply "Yes #{info[:nick]} this is a test."
 	end
