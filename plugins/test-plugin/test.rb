@@ -5,7 +5,7 @@ class TestPlugin < Mirai::Plugin
 	end
   
 	def test_handler(info)
-		reply "Yes #{info[:nick]} this is a test."
+		msg info[:chan], "Yes #{info[:nick]} this is a test."
 	end
 
 	def test_web_handler(env)

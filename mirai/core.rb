@@ -76,7 +76,7 @@ module Mirai
 		end
 
 		def unregister_web_handler handler
-
+      
 		end
 
 		private

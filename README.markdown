@@ -54,7 +54,7 @@ class HelloworldPlugin < Mirai::Plugin
 	end
 
 	def test_handler(info, what)
-		reply "Well, Hello World! #{info[:nick]}. I don't know what #{what} is!"
+		privmsg info[:chan], "Well, Hello World! #{info[:nick]}. I don't know what #{what} is!"
 	end
 
 	def test_web_handler(env)

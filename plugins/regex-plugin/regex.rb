@@ -14,6 +14,6 @@ class RegexPlugin < Mirai::Plugin
 		targetline = @buffer.reverse.find {|line| line[:message].match(/#{one}/) && line[:channel] == info[:channel] }
 		return if targetline.nil?
 		targetline[:message].gsub!(/#{one}/, three)
-		reply "<#{targetline[:nick]}> #{targetline[:message]}"
+		msg info[:chan], "<#{targetline[:nick]}> #{targetline[:message]}"
 	end
 end

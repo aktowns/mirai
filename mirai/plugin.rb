@@ -8,14 +8,20 @@ module Mirai
 			"<##{self.object_id} #{@pluginname} on #{@servername}>"
 		end
 
+
 		private 
+    
 		def rawsend raw
 			puts "< [#{@pluginname}] #{raw}"
 			@em.send_data "#{raw}\r\n"
 		end
+    
 		def privmsg channel, message
 			rawsend "PRIVMSG #{channel} :#{message}"
 		end
+    
+    alias :msg :privmsg
+    
 		def add_channel_handler handler, callback, opts={}
       trigger = opts[:trigger].nil? ? @config.preferredtrigger : opts[:trigger]
       trigger == :none && trigger = ""
@@ -25,6 +31,7 @@ module Mirai
       
 			@handler.register_channel_handler(Regexp.new("#{prefix}#{trigger}#{handler}"), self, callback)
 		end
+    
 		def add_web_handler handler, callback
 			@handler.register_web_handler(handler, self, callback)
 		end
@@ -40,6 +47,7 @@ module Mirai
 		def mirror_handle to, userhash, channel, matches
 			@channel = channel
 			userhash[:channel] = channel
+      userhash[:chan] = channel
 			userhash[:raw] = matches[0]
 			userhash[:matches] = matches
 			send to, userhash, *matches[1..-1]
