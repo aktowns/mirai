@@ -45,6 +45,7 @@ module Mirai
 	end
 end
 
+Dir.chdir(File.dirname(__FILE__))
 
 conf = Mirai::Config.new "config.yml"
 servername = conf.config["Servers"].first["Server"]
