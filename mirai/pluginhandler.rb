@@ -17,7 +17,7 @@ module Mirai
 				pluginmeta["Files"].each do |file|
 					require_relative "../#{metadatalocation}/#{file}"
 				end
-				pluginklass = Object.const_get("#{pluginmeta["Name"]}Plugin").new config, em, servername, pluginmeta["Name"], self
+				pluginklass = Object.const_get("#{pluginmeta["Name"]}Plugin").new config, em, servername, pluginmeta["Name"], self, plugin
 				@plugins[name] = {:pluginklass => pluginklass, :meta => pluginmeta, :conf => plugin}
 				pluginklass.on_register
 			end

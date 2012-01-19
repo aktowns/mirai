@@ -7,16 +7,28 @@ ConfigAuthor: Ashley Towns <ashleyis@me.com>
 BotNick: mirai
 BotUser: ikerawks
 BotFullname: I eat cheese
-PreferredTrigger: `
+PreferredTrigger: \!
 
 # Plugin setup
 Plugins:
   - Plugin: test-plugin  # 'core' plugins are stored in mirai/plugins/
     Update: core
     Restrict: ashleyis!oohbouncy@*
-  - Plugin: regex-plugin  # 'core' plugins are stored in mirai/plugins/
+  - Plugin: regex-plugin
     Update: core
-  # - Plugin: ey-plugin 
+  - Plugin: ey-plugin 
+    Update: core
+    Settings:
+      WebappName: oompfserver
+      WebappRoot: /data/..
+  # - Plugin: pivotal-plugin
+  #   Update: core
+  #   Settings:
+  #     Token: 
+  #     DefaultProject: 77418
+  # - Plugin: zero-plugin
+  #   Update: core
+  # - Plugin: twitterinfo-plugin
   #   Update: core
   # - Plugin: test-http # a plugin can auto update from a website..
   #   Update: http
@@ -42,7 +54,7 @@ Servers:
       - irc.avoidinspace.com:6667 # <server>:[+ ssl]<port>
       - kirby.avoidinspace.com
       - peach.avoidinspace.com
-    Chans: [main, bots]
+    Chans: [main, bots, 0]
     ServerPassword:
     ServerReconnect: true
     DisabledPlugins: [eval]

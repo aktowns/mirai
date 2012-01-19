@@ -1,7 +1,7 @@
 module Mirai
 	class Plugin
-		def initialize config, em, servername, pluginname, handler
-			@em, @config, @servername, @pluginname, @handler = em, config, servername, pluginname, handler
+		def initialize config, em, servername, pluginname, handler, settings
+			@em, @config, @servername, @pluginname, @handler, @settings = em, config, servername, pluginname, handler, settings
 			@trigger = @config.preferredtrigger
 		end
 
@@ -26,6 +26,14 @@ module Mirai
 
 		def reply message
 			privmsg @channel, message
+		end
+
+		def trigger
+			@trigger
+		end
+
+		def settings value
+			@settings["Settings"].nil? ? nil : @settings["Settings"][value]
 		end
 
 		def mirror_handle to, userhash, channel, matches
