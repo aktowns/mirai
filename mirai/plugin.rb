@@ -12,7 +12,7 @@ module Mirai
 		private 
 	
 		def rawsend raw
-			puts "< [#{@pluginname}] #{raw}"
+			puts "[#{@pluginname}] #{raw}".magenta
 			@em.send_data "#{raw}\r\n"
 		end
 	

@@ -3,7 +3,7 @@ module Mirai
 		def initialize config, servername, eventmachine, webserver
 			@config, @servername, @em, @webserver = config, servername, eventmachine, webserver
 			@handlers = {}
-			puts "Core initialized for #{servername}"
+			puts "Core initialized for #{servername}".blue
 		end
 
 		def on_connect
@@ -13,7 +13,7 @@ module Mirai
 		end
 
 		def on_data data
-			puts "> #{data}" if @config.debug?
+			puts "#{data}".green if @config.debug?
 			rgxUser = /^:([^\x07\x2C\s]+?)!([^\x07\x2C\s]+?)@([^\x07\x2C\s]+?)\s(.*)$/
 			rgxServer = /^:([^\x07\x2C\s]+?)\s(.*)$/
 			rgxCmd = /^([^:\x07\x2C\s]+?)\s:(.*)$/
@@ -81,7 +81,7 @@ module Mirai
 		private
 		def rawsend data
 			@em.send_data data + "\r\n"
-			puts "< #{data}"
+			puts "#{data}".yellow
 		end
 
 		def privmsg target, message
@@ -89,7 +89,7 @@ module Mirai
 		end
 
 		def on_channelmessage userhash, channel, message
-			puts "#{userhash[:nick]}->#{channel} >> #{message}"
+			puts "#{userhash[:nick]}->#{channel} >> #{message}".green
 			@handlers.each do |handle, val|
 				if (message.match(handle))
 					val[:obj].send(:mirror_handle, val[:method], userhash, channel, message.match(handle))
@@ -102,17 +102,17 @@ module Mirai
 		end
 
 		def do_pong ping
-			puts "Ping, Pong"
+			puts "Ping, Pong".blue
 			rawsend "PONG #{ping}"
 		end
 
 		def do_join channel, pass=nil
-			puts "Joining #{channel}"
+			puts "Joining #{channel}".blue
 			rawsend "JOIN #{channel} #{pass}"
 		end
 
 		def do_nick newnick
-			puts "Changing nick to #{newnick}"
+			puts "Changing nick to #{newnick}".blue
 			rawsend "NICK #{newnick}"
 		end
 	end

@@ -3,6 +3,7 @@ require 'rubygems'
 require 'yaml'
 require 'eventmachine'
 require 'thin'
+require 'colorize'
 
 unless Kernel.respond_to?(:require_relative)
   module Kernel
