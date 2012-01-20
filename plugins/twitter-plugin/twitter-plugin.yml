@@ -1,0 +1,5 @@
+Name: Twitter
+Author: Rob Mcfadzean <root@sphericalcube.net>
+Version: 0.2
+Type: Channel
+Files: [ twitter.rb ]
