@@ -2,7 +2,9 @@ class TestPlugin < Mirai::Plugin
 	def on_register
 		add_channel_handler(/test/, :test_handler) # Trigger is assumed as default
 		add_channel_handler(/crash/, :crash_handler)
+		add_channel_handler(/version/, :version_handler)
 		add_web_handler(/testing/, :test_web_handler)
+
 	end
   
 	def test_handler(info)
@@ -18,5 +20,9 @@ class TestPlugin < Mirai::Plugin
 	def crash_handler(info)
 		msg info[:chan], "Forcing plugin to crash"
 		bob!
+	end
+
+	def version_handler(info)
+		msg info[:chan], Mirai::version()
 	end
 end
