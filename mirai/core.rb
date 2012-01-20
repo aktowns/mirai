@@ -88,6 +88,10 @@ module Mirai
 			rawsend "PRIVMSG #{target} :#{message}"
 		end
 
+		def action target, message
+			rawsend "PRIVMSG #{target} :\x01ACTION #{message}\x01"
+		end
+
 		def on_channelmessage userhash, channel, message
 			puts "#{userhash[:nick]}->#{channel} >> #{message}"
 			@handlers.each do |handle, val|
