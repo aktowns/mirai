@@ -23,8 +23,10 @@ module Mirai
 		alias :msg :privmsg
 	
 		def action target, message
-			rawsend "PRIVMSG #{target} :\x01ACTION #{message}\x01"
+			privmsg target, "\x01ACTION #{message}\x01"
 		end
+
+		alias :me :action
 
 		def add_channel_handler handler, callback, opts={}
 			trigger = opts[:trigger].nil? ? @config.preferredtrigger : opts[:trigger]

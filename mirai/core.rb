@@ -89,7 +89,7 @@ module Mirai
 		end
 
 		def action target, message
-			rawsend "PRIVMSG #{target} :\x01ACTION #{message}\x01"
+			privmsg target, "\x01ACTION #{message}\x01"
 		end
 
 		def on_channelmessage userhash, channel, message
