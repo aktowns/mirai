@@ -19,7 +19,7 @@ Plugins:
     Update: core
   - Plugin: update-plugin
     Update: core
-  - Plugin: twitter-plugin
+  - Plugin: youtubeurls-plugin
     Update: core
   # - Plugin: ey-plugin 
   #   Update: core
