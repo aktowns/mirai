@@ -96,7 +96,14 @@ module Mirai
 			puts "#{userhash[:nick]}->#{channel} >> #{message}".green
 			@handlers.each do |handle, val|
 				if (message.match(handle))
-					val[:obj].send(:mirror_handle, val[:method], userhash, channel, message.match(handle))
+					begin
+						val[:obj].send(:mirror_handle, val[:method], userhash, channel, message.match(handle))
+					rescue Exception => e
+						puts "Plugin: #{val[:obj]} crashed!".red
+						puts "#{e.message}".red
+						puts "Backtrace:"
+						puts "#{e.backtrace.join("\n")}\n".red
+					end
 				end
 			end
 		end
