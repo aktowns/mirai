@@ -12,6 +12,7 @@ module Mirai
 				next if plugin["Update"] != "core"
 				name = plugin["Plugin"]
 				metadatalocation = "plugins/#{name}/"
+				throw "Plugin is undefined" if name.nil? || name.strip == ""
 				throw "Plugin #{name} does not exist in #{metadatalocation}/#{name}.yml" if !File.exist?("#{metadatalocation}/#{name}.yml")
 
 				pluginmeta = File.open("#{metadatalocation}/#{name}.yml", 'r') {|fp| YAML::load(fp.read) }

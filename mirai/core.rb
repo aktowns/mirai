@@ -4,12 +4,22 @@ module Mirai
 			@config, @servername, @em, @webserver = config, servername, eventmachine, webserver
 			@handlers = {}
 			puts "Core initialized for #{servername}".blue
+
+			@sendQ = []
 		end
 
 		def on_connect
 			rawsend "PASS #{@config.password(@servername)}" if !@config.password(@servername).nil?
 			rawsend "NICK #{@config.nick}"
 			rawsend "USER #{@config.user} mirai * 0 :#{@config.fullname}"
+
+			EventMachine::PeriodicTimer.new(1) do
+				if @sendQ.length > 0
+					msg = @sendQ.pop
+					@em.send_data "#{msg}\r\n" 
+					puts "#{msg}".yellow
+				end
+			end
 		end
 
 		def on_data data
@@ -80,8 +90,9 @@ module Mirai
 
 		private
 		def rawsend data
-			@em.send_data data + "\r\n"
-			puts "#{data}".yellow
+			@sendQ << data
+			#@em.send_data data + "\r\n"
+			#puts "#{data}".yellow
 		end
 
 		def privmsg target, message

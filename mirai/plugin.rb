@@ -2,6 +2,16 @@ module Mirai
 	class Plugin
 		def initialize config, em, servername, pluginname, handler, settings
 			@em, @config, @servername, @pluginname, @handler, @settings = em, config, servername, pluginname, handler, settings
+
+			@sendQ = []
+
+			EventMachine::PeriodicTimer.new(1) do
+				if @sendQ.length > 0
+					msg = @sendQ.pop
+					@em.send_data "#{msg}\r\n" 
+					puts "[#{@pluginname}] #{msg}".magenta
+				end
+			end
 		end
 
 		def inspect
@@ -12,8 +22,9 @@ module Mirai
 		private 
 	
 		def rawsend raw
-			puts "[#{@pluginname}] #{raw}".magenta
-			@em.send_data "#{raw}\r\n"
+			# puts "[#{@pluginname}] #{raw}".magenta
+			# @em.send_data "#{raw}\r\n"
+			@sendQ << raw
 		end
 	
 		def privmsg channel, message
