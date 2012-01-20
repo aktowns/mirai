@@ -45,6 +45,10 @@ module Mirai
 		end
 		@buffer = @buffer[tmp..-1]
 	end
+
+	def self.version
+		"Mirai Git: #{`git log --pretty=oneline | head -n 1`.strip}"
+	end
 end
 
 Dir.chdir(File.dirname(__FILE__))

@@ -19,6 +19,8 @@ Plugins:
     Update: core
   - Plugin: update-plugin
     Update: core
+  - Plugin: twitter-plugin
+    Update: core
   # - Plugin: ey-plugin 
   #   Update: core
   #   Settings:
