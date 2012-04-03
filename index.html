@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mirai by aktowns</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/aktowns/mirai">Fork On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/aktowns/mirai/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/aktowns/mirai/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Mirai</h1>
+          <p>an eventmachine irc bot</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/aktowns">aktowns</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
+        <p><img src="http://i.imgur.com/vyS0s.png" alt=""></p>
+
+<h2>About</h2>
+
+<p>Mirai is yet another ruby irc bot, focused on plugins supplying features over core features in the bot for example the only commands the bot provides without plugins are <code>about-plugin</code> and <code>help [plugin]</code>.  </p>
+
+<p>Mirai is written using the wonderful <a href="http://rubyeventmachine.com/">EventMachine</a> library, and uses <a href="http://yaml.org/start.html">yaml</a> for configuration and <a href="https://github.com/luislavena/sqlite3-ruby">sqlite</a> for storage and <a href="http://daemons.rubyforge.org/">daemons</a> for background processing the builtin webserver is based on <a href="http://code.macournoyer.com/thin/">thin</a>. plugins may contain additional dependencies. </p>
+
+<h2>Why?</h2>
+
+<p>Because I can!, and have different ideas on what a good bot should look like. </p>
+
+<h2>How?</h2>
+
+<p>After editing the config file (below) run <code>./runbot start</code> or to not background the process <code>./runbot start --ontop</code> </p>
+
+<h2>Configuration</h2>
+
+<h3>Dependencies</h3>
+
+<p>To install the rubygem dependencies simply run <code>bundle install</code> in the root of the repo.<br>
+Mirai should run on ruby 1.9.3.</p>
+
+<h3>config.yml</h3>
+
+<p>Mirai uses yaml for all configurations, to setup the bot you will need to open <code>config.yml</code> in your favourite editor.
+When writing plugins you will need to supply a <code>plugin-name.yml</code> file, check writing plugins below for more information.</p>
+
+<p><em>TODO: expand on config</em></p>
+
+<h2>Writing Plugins</h2>
+
+<p>Plugins are subclasses of the <code>Miraii::Plugin</code> class and provide a few helper functions to get you started.<br>
+Firstly, lets create a hello world plugin.</p>
+
+<h3>Hello World</h3>
+
+<p>The folder structure should look similar to the following:<br>
+mirai<br>
+-&gt; plugins<br>
+--&gt; helloworld-plugin<br>
+---&gt; helloworld-plugin.yml<br>
+---&gt; helloworld.rb  </p>
+
+<p><code>helloworld-plugin.yml</code> should consist of:  </p>
+
+<div class="highlight">
+<pre><span class="l-Scalar-Plain">Name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Helloworld</span>
+<span class="l-Scalar-Plain">Author</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Your name &lt;you@email.com&gt;</span>
+<span class="l-Scalar-Plain">Version</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">0.0.1</span>
+<span class="l-Scalar-Plain">Type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Channel</span>
+<span class="l-Scalar-Plain">Files</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span> <span class="nv">helloworld.rb</span> <span class="p-Indicator">]</span>
+</pre>
+</div>
+
+
+<p><code>helloworld.rb</code> should consist of:  </p>
+
+<div class="highlight">
+<pre><span class="k">class</span> <span class="nc">HelloworldPlugin</span> <span class="o">&lt;</span> <span class="no">Mirai</span><span class="o">::</span><span class="no">Plugin</span>
+    <span class="k">def</span> <span class="nf">on_register</span>                                                         <span class="c1"># Called when the plugin is initialized</span>
+        <span class="n">add_channel_handler</span><span class="p">(</span><span class="sr">/talktome (.*)$/</span><span class="p">,</span> <span class="ss">:test_handler</span><span class="p">)</span>            <span class="c1"># ^talktome</span>
+        <span class="n">add_web_handler</span><span class="p">(</span><span class="sr">/helloworld/</span><span class="p">,</span> <span class="ss">:test_web_handler</span><span class="p">)</span>                <span class="c1"># <a href="http://0.0.0.0:3000/helloworld">http://0.0.0.0:3000/helloworld</a></span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">test_handler</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">what</span><span class="p">)</span>
+        <span class="n">privmsg</span> <span class="n">info</span><span class="o">[</span><span class="ss">:chan</span><span class="o">]</span><span class="p">,</span> <span class="s2">"Well, Hello World! </span><span class="si">#{</span><span class="n">info</span><span class="o">[</span><span class="ss">:nick</span><span class="o">]</span><span class="si">}</span><span class="s2">. I don't know what </span><span class="si">#{</span><span class="n">what</span><span class="si">}</span><span class="s2"> is!"</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">test_web_handler</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+        <span class="n">privmsg</span> <span class="s2">"#achannel"</span><span class="p">,</span> <span class="s2">"Hello world from the web!"</span>
+        <span class="s2">"OK"</span>                                                                <span class="c1"># return text "OK" to the webrequest</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+
+<p><em>TODO: expand on plugins more</em></p>
+
+<h3>Builtin Webserver</h3>
+
+<p>Mirai contains a built in webserver in order to write plugins for callbacks from webservices (github for instance)</p>
+
+<p><em>TODO: expand expand</em></p>
+
+<h2>Updates</h2>
+
+<p><em>TODO: self update plugin</em>
+<em>TODO: plugin auto updates</em></p>
+
+<h2>Todo</h2>
+
+<p><em>TODO: todo</em></p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+  </body>
+</html>
