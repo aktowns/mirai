@@ -1,0 +1,5 @@
+Name: Spotify
+Author: Rob Mcfadzean <root@sphericalcube.net>
+Version: 0.1
+Type: Channel
+Files: [ spotify.rb ]
