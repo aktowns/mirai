@@ -1,3 +1,5 @@
+[![Build Status](http://hades.avoidinspace.com:8080/api/badge/github.com/aktowns/mirai/status.svg?branch=master)](http://hades.avoidinspace.com:8080/github.com/aktowns/mirai)
+
 Mirai  
 ================
 ![](http://i.imgur.com/vyS0s.png)  
