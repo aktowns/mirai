@@ -1,4 +1,4 @@
 image: ruby2.0.0
 script:
-  bundle
+  - bundle
 
